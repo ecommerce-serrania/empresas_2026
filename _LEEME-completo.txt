@@ -1,0 +1,164 @@
+SERRANÍA — SITIO ÚNICO (home de empresas + catálogo)
+=====================================================
+
+Un solo repositorio, dos páginas. La home en la raíz y el catálogo en su
+propia carpeta. Son dos index.html, no uno: el catálogo es una página de
+datos, con su ficha de producto y sus listas de prendas, colores y
+tallas, y meterlo dentro de la home la volvería enorme y lenta.
+
+
+ESTRUCTURA
+----------
+  index.html                 La home de empresas
+  CNAME                      El dominio (hoy: empresas.serrania.co)
+  robots.txt                 Permiso de rastreo
+  sitemap.xml                Las 40 direcciones del sitio
+  assets/
+    css/styles.css           Estilos de la home
+    js/main.js               Contacto, pestañas, marcas y video
+    img/                     Fotos de la home, el banner, el video
+    img/marcas/              Los 50 logos de clientes
+  catalogo/
+    index.html               El catálogo
+    producto.html            La ficha de cada prenda
+    css/estilos.css
+    js/                      config, datos y lógica del catálogo
+    img/                     <-- ESTA FALTA, ver abajo
+
+
+LO ÚNICO QUE FALTA
+------------------
+La carpeta catalogo/img. No cabía aquí porque son cientos de fotos de
+producto. Cópiala tú:
+
+  1. Abre  Descargas\\catalogo-main (2)\\catalogo-main\\
+  2. Arrastra la carpeta  img  dentro de  catalogo\\  de este sitio.
+
+Debe quedar así:  catalogo\\img\\productos, catalogo\\img\\estampados,
+catalogo\\img\\empaque, catalogo\\img\\tallas, catalogo\\img\\marcas,
+más logo.png, favicon.png, hero.jpg, hero-movil.jpg y video.mp4.
+
+(El banner, el video y los logos ya están repetidos en assets/img para
+la home. Es a propósito: cada página carga los suyos.)
+
+
+CÓMO SE ENLAZAN LAS DOS PÁGINAS
+-------------------------------
+No hay direcciones absolutas entre ellas, así que el sitio funciona en
+cualquier dominio sin tocar nada:
+
+  Home  ->  catálogo    assets/js/main.js, CONFIG.catalogo = "catalogo/"
+  Catálogo -> home      catalogo/js/config.js, sitioEmpresas = "../"
+
+El botón de catálogo está en el menú, en la portada y en el pie de la
+home. Los tres salen de esa misma línea.
+
+
+EL DOMINIO
+----------
+Quedó puesto  empresas.serrania.co  en cuatro sitios:
+
+  CNAME
+  robots.txt                      (la línea del sitemap)
+  sitemap.xml                     (las 40 direcciones)
+  index.html                      (canonical y etiquetas og:)
+  catalogo/index.html             (canonical y og:)
+  catalogo/js/config.js           (sitio: lo usa la ficha de producto
+                                   para armar su canonical y su imagen
+                                   al compartir)
+
+Si prefieres otro, reemplázalo en esos archivos.
+
+En GoDaddy crea un registro CNAME con nombre  empresas  apuntando a
+ <tu-usuario>.github.io . Luego, en Settings -> Pages del repositorio,
+escribe el dominio y activa Enforce HTTPS cuando se verifique.
+
+
+EL DOMINIO VIEJO NO SE PIERDE
+-----------------------------
+Las direcciones del catálogo cambian: lo que era
+ catalogo.serrania.co/producto.html?id=cyclone  ahora es
+ empresas.serrania.co/catalogo/producto.html?id=cyclone
+
+Para que ningún enlace compartido se rompa, en la carpeta REDIRECCION
+tienes tres archivos. Deja el repositorio viejo del catálogo publicado,
+bórrale todo y sube solo esos tres: cualquiera que entre a una dirección
+vieja aterriza en la nueva, conservando la prenda o la categoría que
+traía el enlace.
+
+
+ANTES DE PUBLICAR, REVISA
+-------------------------
+1. WhatsApp y correo. La home los tenía sin configurar. Les puse los del
+   catálogo: 573160537301 y gerenciacomercial@serrania.co. Se cambian en
+   assets/js/main.js (CONFIG) y en catalogo/js/config.js.
+
+2. GA4. El catálogo ya trae su etiqueta (G-1Q8EYWX263) en
+   catalogo/index.html. La home no tiene ninguna: si quieres medir las
+   dos con la misma propiedad, copia ese mismo bloque de <script> al
+   <head> de index.html.
+
+3. La ficha de producto todavía muestra la cinta de marcas al final. Si
+   prefieres quitarla, dime y la saco.
+
+
+PROBADO
+-------
+Celular (390 px) y computador (1280 px): la home abre el catálogo, el
+catálogo vuelve a la home, las 31 prendas abren con la vista rápida, la
+ficha de producto carga con su tabla de tallas, el video arranca solo al
+entrar en pantalla, los 50 logos cargan, y no hay errores de JavaScript
+ni desbordamiento horizontal.
+
+
+NAVEGACIÓN EN CELULAR
+---------------------
+La cabecera deja solo el logo y el botón de las tres rayas. Adentro están
+Soluciones, Garantía, Impacto social, Catálogo y el botón de WhatsApp. Se
+cierra al tocar un enlace o con la tecla Esc.
+
+Abajo quedan dos botones fijos: el del catálogo a la izquierda y el de
+WhatsApp a la derecha. El del catálogo aparece solo en celular, donde el
+menú está escondido. Si lo quieres también en computador, en
+assets/css/styles.css busca  .cat-flotante  y cambia  display: none  por
+display: inline-flex.
+
+
+LA CINTA DE MARCAS
+------------------
+En computador las marcas van en rejilla quieta, con cada logo una sola
+vez. En celular se vuelven dos cintas que corren solas en sentidos
+opuestos, a unos 60 px por segundo, porque la rejilla ahí se convertía en
+una columna larguísima.
+
+El cambio de una forma a la otra lo hace assets/js/main.js al cruzar los
+760 px de ancho. La velocidad se cambia en assets/css/styles.css, en
+.cinta-pista: a más segundos, más lento (hoy 45 s la fila de arriba y
+52 s la de abajo).
+
+Cada cinta lleva sus logos repetidos dos veces: así, al correrla justo la
+mitad, el final empalma con el principio y el bucle no salta. Si agregas
+o quitas marcas en MARCAS (assets/js/main.js) eso se recalcula solo.
+
+
+NAVEGACIÓN
+----------
+La barra de arriba se queda fija al bajar. La sección que tienes en
+pantalla aparece marcada en el menú —subrayada en dorado en computador,
+en dorado en el menú de celular—, para no perder el hilo en una página
+de una sola tirada.
+
+Al saltar a una sección, el título ya no queda escondido detrás de la
+barra: eso lo controla scroll-padding-top en assets/css/styles.css (80 px
+en computador, 74 en celular). Si algún día cambias el alto de la
+cabecera, ajusta también ese número.
+
+En celular el menú cae sobre la página en vez de empujarla, así no se
+pierde el punto donde ibas leyendo.
+
+Al final del pie hay un "Volver arriba".
+
+Del catálogo se vuelve a la home por cuatro caminos: el logo, el enlace
+de la franja azul, el pie, y en la ficha de producto la ruta de arriba
+(Inicio / Catálogo / la prenda). Los cuatro salen de sitioEmpresas, en
+catalogo/js/config.js.

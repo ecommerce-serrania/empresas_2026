@@ -1,0 +1,91 @@
+===========================================================
+  SUBIR EL SITIO A GITHUB — 3 PASOS
+  Versión del 19 de noviembre de 2026
+===========================================================
+
+
+PASO 1 · COPIAR LAS FOTOS DE PRODUCTO
+--------------------------------------
+Es lo único que falta. Pesan 76 MB y por eso no venían.
+
+  Abre:      Descargas\catalogo-main (2)\catalogo-main\img\
+  Arrastra:  la carpeta  productos
+  Hasta:     catalogo\img\   (de esta misma carpeta)
+
+Cuando termines, dentro de catalogo\img\ debe haber:
+  productos, tallas, estampados, empaque, marcas,
+  favicon.png, apple-touch-icon.png, logo.png, hero.jpg,
+  hero-movil.jpg
+
+Borra el archivo FALTA-SOLO-PRODUCTOS.txt que está ahí.
+
+
+PASO 2 · BORRAR LO QUE NO VA AL REPOSITORIO
+--------------------------------------------
+Estos tres son notas para ti, no son parte del sitio.
+Bórralos antes de subir (o simplemente no los selecciones):
+
+  _LEEME-PRIMERO.txt          <- este archivo
+  _LEEME-completo.txt
+  _REDIRECCION-dominio-viejo  <- esta carpeta va en OTRO repositorio,
+                                 el viejo del catálogo. Mira abajo.
+
+
+PASO 3 · SUBIR
+---------------
+  1. Entra a tu repositorio en GitHub.
+  2. Add file -> Upload files.
+  3. IMPORTANTE: abre esta carpeta, selecciona TODO lo que hay
+     adentro (Ctrl+E para seleccionar todo) y arrastra ESO.
+
+     NO arrastres la carpeta SERRANIA-GITHUB entera. Si lo haces,
+     GitHub te deja el sitio metido un nivel más abajo y la página
+     queda en blanco.
+
+     Lo que debe quedar en la raíz del repositorio:
+       index.html
+       CNAME
+       robots.txt
+       sitemap.xml
+       favicon.png
+       apple-touch-icon.png
+       assets\      (carpeta)
+       catalogo\    (carpeta)
+
+  4. Commit changes.
+  5. Settings -> Pages. En Source elige Deploy from a branch,
+     rama main, carpeta / (root). Guarda.
+  6. En Custom domain escribe  empresas.serrania.co  y guarda.
+  7. En GoDaddy crea un registro CNAME con nombre  empresas
+     apuntando a  <tu-usuario>.github.io
+  8. Cuando el dominio se verifique, marca Enforce HTTPS.
+
+Subir 190 archivos puede tardar un par de minutos. Si GitHub se
+queja por cantidad, sube primero assets\ y catalogo\ por separado
+y después los archivos sueltos de la raíz.
+
+
+EL DOMINIO VIEJO
+----------------
+La carpeta _REDIRECCION-dominio-viejo tiene tres archivos para el
+repositorio viejo del catálogo. Déjalo publicado, bórrale todo el
+contenido y sube esos tres: así quien entre por un enlace viejo de
+catalogo.serrania.co aterriza en la dirección nueva, conservando la
+prenda que traía.
+
+Si prefieres quedarte con catalogo.serrania.co como dominio único
+en vez de empresas.serrania.co, no uses esa carpeta y cambia el
+nombre en los archivos que lista _LEEME-completo.txt.
+
+
+SI ALGO SALE MAL
+----------------
+  La página sale en blanco
+      -> arrastraste la carpeta en vez de su contenido.
+         Borra todo en GitHub y vuelve al paso 3.
+
+  Las prendas salen sin foto
+      -> falta el paso 1.
+
+  Sale la lista de archivos en vez del catálogo
+      -> eso pasa solo abriendo desde el disco, no publicado.
