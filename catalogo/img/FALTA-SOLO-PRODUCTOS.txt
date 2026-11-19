@@ -1,0 +1,4 @@
+Falta solo la carpeta "productos" con las fotos de las prendas.
+Pesa 76 MB, por eso no cabe en el zip.
+Copiala desde: Descargas\catalogo-main (2)\catalogo-main\img\productos
+y pegala aqui, dentro de catalogo\img\.
